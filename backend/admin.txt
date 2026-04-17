@@ -1,0 +1,2 @@
+adminEmail = admin@example.com
+adminPassword = adminpassword123

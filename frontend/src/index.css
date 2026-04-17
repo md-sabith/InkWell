@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-paper-100 text-ink font-sans selection:bg-paper-200 selection:text-ink;
+  }
+}
+
+.manuscript-card {
+  @apply bg-paper-50 border border-paper-200 shadow-manuscript rounded-sm p-4 md:p-6 relative overflow-hidden;
+}
+
+body {
+  @apply bg-paper-100 text-ink font-sans selection:bg-paper-200 selection:text-ink overflow-x-hidden;
+}
+
+.manuscript-card::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-1 bg-ink opacity-10;
+}
+
+.text-content {
+  @apply font-serif leading-relaxed text-lg;
+}
+
+.btn-primary {
+  @apply px-6 py-2 bg-ink text-paper-50 rounded-sm hover:bg-ink-light transition-colors font-medium;
+}
+
+.btn-secondary {
+  @apply px-6 py-2 border border-ink text-ink rounded-sm hover:bg-ink hover:text-paper-50 transition-all font-medium;
+}
