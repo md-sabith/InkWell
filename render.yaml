@@ -14,7 +14,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
 
-  # Frontend Service
+  # Frontend Service 
   - type: web
     name: ink-well-frontend
     rootDir: frontend
