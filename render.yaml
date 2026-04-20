@@ -1,0 +1,33 @@
+services:
+  # Backend Service
+  - type: web
+    name: literature-platform-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false # Set this in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Frontend Service
+  - type: static
+    name: literature-platform-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: literature-platform-backend
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
