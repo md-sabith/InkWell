@@ -6,23 +6,31 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '480px',
+      },
       colors: {
         paper: {
-          50: '#fdfcf7',
-          100: '#f9f7e8',
-          200: '#f3efd1',
+          50: '#FFFFFF',   // Pure White for cards
+          100: '#F4F7F6',  // Cool Off-white for background
+          200: '#E2E8F0',  // Subtle Borders
         },
         ink: {
-          DEFAULT: '#1a1a1a',
-          light: '#4a4a4a',
+          DEFAULT: '#1A1C1E', // Deep Charcoal-Blue
+          light: '#4A6274',   // Steel Blue for secondary
+        },
+        accent: {
+          DEFAULT: '#5B7B7A', // Sage Green
+          dark: '#465F5E',
         }
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'serif'],
+        serif: ['Lora', 'serif'],
         sans: ['Inter', 'sans-serif'],
       },
       boxShadow: {
-        'manuscript': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        'nordic': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+        'manuscript': '0 2px 15px -3px rgba(0, 0, 0, 0.07)',
       }
     },
   },

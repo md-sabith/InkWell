@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
 import { X, Feather } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 const UploadWork = ({ isOpen, onClose }) => {
   const [formData, setFormData] = React.useState({ title: '', category: 'Story', content: '' });
@@ -14,9 +15,9 @@ const UploadWork = ({ isOpen, onClose }) => {
     try {
       const success = await uploadWork(formData);
       if (success) {
-        console.log('Manuscript published successfully');
         setFormData({ title: '', category: 'Story', content: '' });
         onClose();
+        toast.info('Manuscript waiting for approval');
       } else {
         console.log('Failed to publish manuscript');
       }
@@ -26,8 +27,8 @@ const UploadWork = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm">
-      <div className="manuscript-card w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+      <div className="manuscript-card w-full max-w-2xl max-h-[95vh] overflow-y-scroll">
         <button onClick={onClose} className="absolute top-4 right-4 text-ink/20 hover:text-ink">
           <X className="w-6 h-6" />
         </button>
@@ -45,7 +46,7 @@ const UploadWork = ({ isOpen, onClose }) => {
                 type="text"
                 required
                 placeholder="The Silent Echo"
-                className="w-full px-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink transition-all font-serif italic text-xl"
+                className="w-full px-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink transition-all text-xl"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               />
@@ -69,17 +70,19 @@ const UploadWork = ({ isOpen, onClose }) => {
             <label className="text-xs font-bold text-ink/40 uppercase">Content</label>
             <textarea
               required
-              rows={12}
+              rows={8}
               placeholder="Begin your masterpiece..."
-              className="w-full px-6 py-6 bg-paper-100 border border-paper-200 outline-none focus:border-ink transition-all font-serif leading-relaxed text-lg"
+              className="w-full px- py-4 bg-paper-100 border border-paper-200 outline-none focus:border-ink transition-all leading-relaxed text-lg"
               value={formData.content}
               onChange={(e) => setFormData({ ...formData, content: e.target.value })}
             />
           </div>
 
           
-            <button type="button" onClick={onClose} className="btn-secondary mr-4">Cancel</button>
-            <button type="submit" className="btn-primary px-12">Publish Manuscript</button>
+          <div className="flex flex-col sm:flex-row items-center gap-4 ">
+            <button type="submit" className="btn-primary w-full sm:w-auto px-12 order-1 sm:order-2">Publish Manuscript</button>
+            <button type="button" onClick={onClose} className="btn-secondary w-full sm:w-auto order-2 sm:order-1">Cancel</button>
+          </div>
           
         </form>
       </div>

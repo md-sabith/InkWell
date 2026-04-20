@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { useStore } from '../store/useStore';
+import { useStore, API_URL } from '../store/useStore';
+
 import { Mail, Lock } from 'lucide-react';
 
 const Login = () => {
@@ -14,7 +15,8 @@ const Login = () => {
     e.preventDefault();
     setError('');
     try {
-      const { data } = await axios.post('https://literature-platform-backend.onrender.com/api/auth/login', formData);
+      const { data } = await axios.post(`${API_URL}/auth/login`, formData);
+
       setUser(data.user, data.token);
       navigate('/');
     } catch (err) {

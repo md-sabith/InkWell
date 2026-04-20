@@ -30,14 +30,14 @@ const AdminPanel = ({ isOpen, onClose }) => {
           {pendingWorks.length === 0 ? (
             <div className="text-center py-20 bg-paper-100/50 border border-dashed border-paper-200">
               <Clock className="w-12 h-12 text-ink/20 mx-auto mb-4" />
-              <p className="text-ink/40 font-serif italic text-xl">The curation queue is empty...</p>
+              <p className="text-ink/40 font-serif  text-xl">The curation queue is empty...</p>
             </div>
           ) : (
             pendingWorks.map((work) => (
               <div key={work._id} className="p-6 bg-paper-50 border border-paper-200 hover:border-ink/20 transition-all group">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-serif font-bold italic text-ink">{work.title}</h3>
+                    <h3 className="text-2xl font-serif font-bold  text-ink">{work.title}</h3>
                     <p className="text-xs font-bold text-ink/40 uppercase mt-1">
                       By {work.author?.username} • {work.category}
                     </p>

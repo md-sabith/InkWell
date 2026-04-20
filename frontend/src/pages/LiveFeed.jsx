@@ -9,6 +9,7 @@ import AdminPanel from '../components/AdminPanel';
 import AdminLogin from '../components/AdminLogin';
 import { BookText, ScrollText, Filter } from 'lucide-react';
 import AdminNavbar from '../components/AdminNavbar';
+import AdminFooterNav from '../components/AdminFooterNav';
 
 function LiveFeed() {
     const { works, fetchWorks, loading, user, isSidebarOpen } = useStore();
@@ -40,7 +41,7 @@ function LiveFeed() {
                             <div className="lg:col-span-8 order-2 lg:order-1">
                                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-paper-200">
                                     <div className="flex items-center space-x-3">
-                                        <ScrollText className="w-10 h-10 text-amber-500" />
+                                        <ScrollText className="w-10 h-10 text-accent" />
                                         <h2 className="text-3xl font-serif font-black uppercase tracking-widest text-ink">Live Archives</h2>
                                     </div>
 
@@ -76,7 +77,7 @@ function LiveFeed() {
                                 ) : (
                                     <div className="manuscript-card text-center py-20">
                                         <BookText className="w-16 h-16 text-paper-200 mx-auto mb-4" />
-                                        <p className="text-ink/40 font-serif italic text-xl">The archives are empty...</p>
+                                        <p className="text-ink/40 font-serif  text-xl">The archives are empty...</p>
                                     </div>
                                 )}
                             </div>
@@ -87,7 +88,7 @@ function LiveFeed() {
 
                                     <div className="mt-8 p-6 border border-dashed border-paper-200 rounded-sm">
                                         <h4 className="text-xs font-bold text-ink/40 uppercase tracking-widest mb-2">Authority Control</h4>
-                                        <p className="text-sm font-serif italic text-ink/60 leading-relaxed">
+                                        <p className="text-sm font-serif  text-ink/60 leading-relaxed">
                                             "Observing the flow of the legends. Ensuring every word meets the standard of the great archives."
                                         </p>
                                     </div>
@@ -107,6 +108,7 @@ function LiveFeed() {
                 onClose={() => setAdminLoginOpen(false)}
                 onLoginSuccess={() => setAdminOpen(true)}
             />
+            <AdminFooterNav />
         </div>
     );
 }

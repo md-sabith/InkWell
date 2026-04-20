@@ -6,6 +6,7 @@ import { useStore } from '../store/useStore';
 import Auth from '../components/Auth';
 import UploadWork from '../components/UploadWork';
 import { Trophy } from 'lucide-react';
+import FooterNav from '../components/FooterNav';
 
 const LeaderboardPage = () => {
     const { isSidebarOpen } = useStore();
@@ -21,10 +22,10 @@ const LeaderboardPage = () => {
                     onUploadClick={() => setUploadOpen(true)} 
                 />
 
-                <main className={`transition-all duration-300 ${isSidebarOpen ? 'lg:pl-56' : 'lg:pl-24'} mt-16 pt-16 flex-1 p-2 md:p-2 overflow-y-auto`}>
-                    <div className='mx-auto'>
-                        <div className="flex items-center space-x-4 mb-8 pb-4 border-b border-paper-200">
-                            <Trophy className="w-10 h-10 text-amber-500" />
+                <main className={`transition-all duration-300 ${isSidebarOpen ? 'lg:pl-48' : 'lg:pl-12'} pt-16 flex-1 p-4 md:p-8 lg:p-12`}>
+                    <div className='max-w-5xl mx-auto mt-4 md:mt-20'>
+                        <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8 pb-8 border-b border-paper-200">
+                            <Trophy className="w-10 h-10 text-accent" />
                             <div>
                                 <h1 className="text-3xl font-serif font-black uppercase tracking-widest text-ink">Hall of Fame</h1>
                                 <p className="text-xs text-ink/40 font-bold uppercase tracking-[0.3em]">The greatest legends of Manuscript</p>
@@ -38,6 +39,9 @@ const LeaderboardPage = () => {
                 <Auth isOpen={authOpen} onClose={() => setAuthOpen(false)} />
                 <UploadWork isOpen={uploadOpen} onClose={() => setUploadOpen(false)} />
             </div>
+            <FooterNav
+          onUploadClick={() => setUploadOpen(true)}
+        />
         </>
     );
 };

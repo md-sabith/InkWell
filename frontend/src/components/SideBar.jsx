@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { LogOut, ShieldCheck, PanelLeftOpen, PanelLeftClose, Scroll, LayoutDashboardIcon, ScrollText, Trophy } from 'lucide-react';
+import { LogOut, ShieldCheck, PanelLeftOpen, PanelLeftClose, Scroll, LayoutDashboardIcon, ScrollText, Trophy, ClipboardList } from 'lucide-react';
 
 function SideBar() {
     const { logout, isSidebarOpen, setSidebarOpen, user } = useStore();
@@ -9,17 +9,17 @@ function SideBar() {
 
     if (!isSidebarOpen) {
         return (
-            <div className='hidden lg:flex w-12 h-screen bg-ink text-paper-50 flex-col z-50 fixed left-0 top-0 shadow-2xl items-center pt-4'>
+            <div className='hidden lg:flex w-12 h-screen bg-paper-50 text-ink flex-col z-50 fixed left-0 top-0 shadow-sm border-r border-paper-200 items-center pt-4'>
                 <button
                     onClick={() => setSidebarOpen(true)}
-                    className="p-2 hover:bg-paper-50/10 transition-all"
+                    className="p-2 hover:bg-paper-100 transition-all"
                     title="Open Sidebar"
                 >
                     <PanelLeftOpen className="h-6 w-6" />
                 </button>
 
                 <div className="mt-4 p-2">
-                    <ShieldCheck className="w-6 h-6 text-paper" />
+                    <ShieldCheck className="w-6 h-6 text-accent" />
                 </div>
 
                 <nav className="flex-1 p-6 space-y-4 overflow-y-auto mt-4">
@@ -28,12 +28,17 @@ function SideBar() {
                             <LayoutDashboardIcon className="w-6 h-6 opacity-70 hover:opacity-100" />
                         </div>
                     </Link>
+                    <Link to="/admin/pending" title="Pending Review">
+                        <div className="p-2 hover:bg-paper-50/10 rounded-lg transition-all">
+                            <ClipboardList className="w-6 h-6 opacity-70 hover:opacity-100" />
+                        </div>
+                    </Link>
                     <Link to="/admin/feed" title="Admin Live Feed">
                         <div className="p-2 hover:bg-paper-50/10 rounded-lg transition-all">
                             <ScrollText className="w-6 h-6 opacity-70 hover:opacity-100" />
                         </div>
                     </Link>
-                    <Link to="/admin/leaderboard" title="Admin Live Feed">
+                    <Link to="/admin/leaderboard" title="Admin Hall of Fame">
                         <div className="p-2 hover:bg-paper-50/10 rounded-lg transition-all">
                             <Trophy className="w-6 h-6 opacity-70 hover:opacity-100" />
                         </div>
@@ -62,11 +67,11 @@ function SideBar() {
                 onClick={() => setSidebarOpen(false)}
             />
 
-            <aside className="w-48 h-screen bg-ink text-paper-50 flex flex-col z-50 fixed left-0 top-0 shadow-2xl border-r border-paper-50/5">
+            <aside className="w-48 h-screen bg-paper-50 text-ink flex flex-col z-50 fixed left-0 top-0 shadow-sm border-r border-paper-200">
                 <div className="border-b border-paper-50/10 relative group">
                     <button
                         onClick={() => setSidebarOpen(false)}
-                        className="absolute top-4 right-2 p-2 text-paper-50/40 hover:text-paper-50 hover:bg-paper-50/10 rounded-full transition-all"
+                        className="absolute top-4 right-2 p-2 text-ink/40 hover:text-accent hover:bg-paper-100 rounded-full transition-all"
                         title="Close Sidebar"
                     >
                         <PanelLeftClose className="h-6 w-6" />
@@ -74,7 +79,7 @@ function SideBar() {
 
                     <div className="flex items-center space-x-3 mb-2 mt-16 p-2">
                         <div className="rounded-xl">
-                            <ShieldCheck className="w-7 h-7 text-paper" />
+                            <ShieldCheck className="w-7 h-7 text-accent" />
                         </div>
                         <div>
                             <h1 className="text-md font-black uppercase tracking-[0.2em]">Authority</h1>
@@ -84,29 +89,36 @@ function SideBar() {
                 </div>
 
                 <nav className="flex-1 p-1 space-y-4 overflow-y-auto mt-4">
-                    <Link to="/admin/dashboard" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-50/5 transition-all group border border-transparent hover:border-paper-50/10">
+                    <Link to="/admin/dashboard" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-100 transition-all group border border-transparent hover:border-paper-200">
                         <div className="rounded-lg">
                             <LayoutDashboardIcon className="w-6 h-6 opacity-70 group-hover:opacity-100" />
                         </div>
-                        <span className="text-[12px] font-bold uppercase tracking-widest text-paper-50/80 group-hover:text-paper-50">Pending Review</span>
+                        <span className="text-[12px] font-bold uppercase tracking-widest text-ink/60 group-hover:text-accent">Main Dashboard</span>
                     </Link>
 
-                    <Link to="/admin/feed" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-50/5 transition-all group border border-transparent hover:border-paper-50/10">
+                    <Link to="/admin/pending" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-100 transition-all group border border-transparent hover:border-paper-200">
+                        <div className="rounded-lg">
+                            <ClipboardList className="w-6 h-6 opacity-70 group-hover:opacity-100" />
+                        </div>
+                        <span className="text-[12px] font-bold uppercase tracking-widest text-ink/60 group-hover:text-accent">Pending Review</span>
+                    </Link>
+
+                    <Link to="/admin/feed" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-100 transition-all group border border-transparent hover:border-paper-200">
                         <div className="rounded-lg">
                             <ScrollText className="w-6 h-6 opacity-70 group-hover:opacity-100" />
                         </div>
-                        <span className="text-[12px] font-bold uppercase tracking-widest text-paper-50/80 group-hover:text-paper-50">View Live Feed</span>
+                        <span className="text-[12px] font-bold uppercase tracking-widest text-ink/60 group-hover:text-accent">View Live Feed</span>
                     </Link>
 
-                    <Link to="/admin/leaderboard" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-50/5 transition-all group border border-transparent hover:border-paper-50/10">
+                    <Link to="/admin/leaderboard" className="flex items-center space-x-4 p-2 rounded-xl hover:bg-paper-100 transition-all group border border-transparent hover:border-paper-200">
                         <div className="rounded-lg">
                             <Trophy className="w-6 h-6 opacity-70 group-hover:opacity-100" />
                         </div>
-                        <span className="text-[12px] font-bold uppercase tracking-widest text-paper-50/80 group-hover:text-paper-50">Hall of Fame</span>
+                        <span className="text-[12px] font-bold uppercase tracking-widest text-ink/60 group-hover:text-accent">Hall of Fame</span>
                     </Link>
                 </nav>
 
-                <div className="p-4 border-t border-paper-50/10 bg-black/20">
+                <div className="p-4 border-t border-paper-200">
                     <button
                         onClick={() => {
                             logout();

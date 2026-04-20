@@ -10,7 +10,7 @@ const router = express.Router();
 //get pending works
 router.get('/pending', auth, async (req, res) => {
   try {
-    const works = await Work.find({ status: 'pending' }).populate('author', 'username profilePicture').sort({ createdAt: -1 });
+    const works = await Work.find({ status: 'pending' }).populate('author', 'username profilePicture status').sort({ createdAt: -1 });
     res.json(works);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { useStore } from '../store/useStore';
+import { useStore, API_URL } from '../store/useStore';
+
 import { X, Mail, Lock, User as UserIcon } from 'lucide-react';
 
 const Auth = ({ isOpen, onClose }) => {
@@ -16,7 +17,8 @@ const Auth = ({ isOpen, onClose }) => {
     setError('');
     try {
       const endpoint = isLogin ? '/auth/login' : '/auth/signup';
-      const { data } = await axios.post(`https://literature-platform-backend.onrender.com/api${endpoint}`, formData);
+      const { data } = await axios.post(`${API_URL}${endpoint}`, formData);
+
       setUser(data.user, data.token);
       onClose();
     } catch (err) {
@@ -53,7 +55,7 @@ const Auth = ({ isOpen, onClose }) => {
               </div>
             </div>
           )}
-          
+
           <div className="space-y-1">
             <label className="text-xs font-bold text-ink/40 uppercase">Email Address</label>
             <div className="relative">
@@ -89,7 +91,7 @@ const Auth = ({ isOpen, onClose }) => {
 
         <p className="mt-6 text-center text-sm text-ink/40">
           {isLogin ? "Don't have an account?" : "Already have an account?"}
-          <button 
+          <button
             onClick={() => setIsLogin(!isLogin)}
             className="ml-2 font-bold text-ink hover:underline"
           >

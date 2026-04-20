@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { useStore } from '../store/useStore';
+import { useStore, API_URL } from '../store/useStore';
+
 import { Mail, Lock, User as UserIcon, PenLine } from 'lucide-react';
 
 const Signup = () => {
@@ -31,7 +32,8 @@ const Signup = () => {
     e.preventDefault();
     setError('');
     try {
-      const { data } = await axios.post('https://literature-platform-backend.onrender.com/api/auth/signup', formData);
+      const { data } = await axios.post(`${API_URL}/auth/signup`, formData);
+
       setUser(data.user, data.token);
       navigate('/');
     } catch (err) {
@@ -83,13 +85,13 @@ const Signup = () => {
                   type="text"
                   required
                   placeholder="e.g. Shakespeare"
-                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif italic text-lg shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif  text-lg shadow-sm"
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 />
               </div>
             </div>
-            
+
             <div className="space-y-1">
               <label className="text-xs font-bold text-ink/40 uppercase tracking-widest">Messenger (Email)</label>
               <div className="relative">
@@ -98,7 +100,7 @@ const Signup = () => {
                   type="email"
                   required
                   placeholder="messenger@art.com"
-                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif italic text-lg shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif  text-lg shadow-sm"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
@@ -113,7 +115,7 @@ const Signup = () => {
                   type="password"
                   required
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif italic text-lg shadow-sm"
+                  className="w-full pl-12 pr-4 py-3 bg-paper-100 border border-paper-200 outline-none focus:border-ink/40 rounded-xl transition-all font-serif  text-lg shadow-sm"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
@@ -122,8 +124,8 @@ const Signup = () => {
           </div>
 
           <button type="submit" className="w-full py-4 bg-ink text-paper-50 rounded-2xl font-black uppercase tracking-[0.3em] shadow-2xl hover:bg-ink/90 active:scale-[0.98] transition-all flex items-center justify-center space-x-3">
-             <PenLine className="w-5 h-5" />
-             <span>Join the Guild</span>
+            <PenLine className="w-5 h-5" />
+            <span>Join the Guild</span>
           </button>
         </form>
 
@@ -133,7 +135,7 @@ const Signup = () => {
             Sign In
           </Link>
         </p>
-        
+
         <div className="mt-8 pt-6 border-t border-paper-200 text-center">
           <Link to="/" className="text-xs font-bold text-ink/40 uppercase tracking-widest hover:text-ink">
             Back to Home

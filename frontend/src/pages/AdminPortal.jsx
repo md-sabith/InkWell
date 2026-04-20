@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '../store/useStore';
+import { useStore, API_URL } from '../store/useStore';
+
 import { ShieldCheck, Lock, Mail } from 'lucide-react';
 
 const AdminPortal = () => {
@@ -14,15 +15,16 @@ const AdminPortal = () => {
     e.preventDefault();
     setError('');
     try {
-      const { data } = await axios.post('https://literature-platform-backend.onrender.com/api/admin/admin-login', formData);
-      
+      const { data } = await axios.post(`${API_URL}/admin/admin-login`, formData);
+
+
       if (data.user.role !== 'admin') {
         setError('Access denied. You do not have administrative privileges.');
         return;
       }
 
       setUser(data.user, data.token);
-      navigate('/admin/dashboard');
+      navigate('/admin/pending');
     } catch (err) {
       setError(err.response?.data?.message || 'Authentication failed');
     }
@@ -42,7 +44,7 @@ const AdminPortal = () => {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-serif italic">
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-serif ">
             {error}
           </div>
         )}
@@ -56,7 +58,7 @@ const AdminPortal = () => {
                 type="email"
                 required
                 placeholder="admin@manuscript.ly"
-                className="w-full pl-10 pr-4 py-3 bg-paper-50 border border-paper-200 outline-none focus:border-ink transition-all font-serif italic"
+                className="w-full pl-10 pr-4 py-3 bg-paper-50 border border-paper-200 outline-none focus:border-ink transition-all font-serif "
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -78,8 +80,8 @@ const AdminPortal = () => {
             </div>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-ink text-paper-50 py-4 font-bold uppercase tracking-[0.2em] hover:bg-ink/90 transition-all shadow-lg active:scale-[0.98]"
           >
             Authorize Entry

@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -24,7 +25,8 @@ router.post('/signup', async (req, res) => {
         username, 
         email, 
         profilePicture: user.profilePicture,
-        role: user.role 
+        role: user.role,
+        status: user.status
       } 
     });
   } catch (error) {
@@ -48,8 +50,50 @@ router.post('/login', async (req, res) => {
         username: user.username, 
         email: user.email, 
         profilePicture: user.profilePicture,
-        role: user.role 
+        role: user.role,
+        status: user.status
       } 
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      profilePicture: user.profilePicture,
+      role: user.role,
+      status: user.status
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.put('/profile', auth, async (req, res) => {
+  try {
+    const { username, email, profilePicture } = req.body;
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (profilePicture) user.profilePicture = profilePicture;
+
+    await user.save();
+    res.json({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      profilePicture: user.profilePicture,
+      role: user.role,
+      status: user.status
     });
   } catch (error) {
     res.status(400).json({ message: error.message });

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { useStore } from '../store/useStore';
+import { useStore, API_URL } from '../store/useStore';
+
 import { X, ShieldCheck, Lock, Mail } from 'lucide-react';
 
 const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
@@ -14,8 +15,9 @@ const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
     e.preventDefault();
     setError('');
     try {
-      const { data } = await axios.post('https://literature-platform-backend.onrender.com/api/admin/admin-login', formData);
-      
+      const { data } = await axios.post(`${API_URL}/admin/admin-login`, formData);
+
+
       if (data.user.role !== 'admin') {
         setError('Access denied. You do not have administrative privileges.');
         return;
@@ -34,7 +36,7 @@ const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
       <div className="manuscript-card w-full max-w-md border-ink/20 shadow-2xl relative overflow-hidden">
         {/* Decorative background element */}
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-ink/5 rounded-full blur-3xl pointer-events-none" />
-        
+
         <button onClick={onClose} className="absolute top-6 right-6 text-ink/40 hover:text-ink transition-colors">
           <X className="w-6 h-6" />
         </button>
@@ -50,7 +52,7 @@ const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-serif italic">
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-serif ">
             {error}
           </div>
         )}
@@ -64,7 +66,7 @@ const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
                 type="email"
                 required
                 placeholder="admin@manuscript.ly"
-                className="w-full pl-10 pr-4 py-3 bg-paper-50 border border-paper-200 outline-none focus:border-ink transition-all font-serif italic"
+                className="w-full pl-10 pr-4 py-3 bg-paper-50 border border-paper-200 outline-none focus:border-ink transition-all font-serif "
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -86,8 +88,8 @@ const AdminLogin = ({ isOpen, onClose, onLoginSuccess }) => {
             </div>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-ink text-paper-50 py-4 font-bold uppercase tracking-[0.2em] hover:bg-ink/90 transition-all shadow-lg active:scale-[0.98]"
           >
             Authorize Entry

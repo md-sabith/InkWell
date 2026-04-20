@@ -1,5 +1,6 @@
 import React from 'react';
 import AdminNavbar from '../components/AdminNavbar';
+import AdminFooterNav from '../components/AdminFooterNav';
 import Leaderboard from '../components/Leaderboard';
 import { useStore } from '../store/useStore';
 import Auth from '../components/Auth';
@@ -21,7 +22,7 @@ const LeaderboardPage = () => {
                 <div className="p-4 md:p-12">
                     <div>
                         <div className="flex items-center space-x-4 mb-8 pb-4 border-b border-paper-200">
-                            <Trophy className="w-10 h-10 text-amber-500" />
+                            <Trophy className="w-10 h-10 text-accent" />
                             <div>
                                 <h1 className="text-3xl font-serif font-black uppercase tracking-widest text-ink">Hall of Fame</h1>
                                 <p className="text-xs text-ink/40 font-bold uppercase tracking-[0.3em]">The greatest legends of Manuscript</p>
@@ -35,6 +36,7 @@ const LeaderboardPage = () => {
 
             <Auth isOpen={authOpen} onClose={() => setAuthOpen(false)} />
             <UploadWork isOpen={uploadOpen} onClose={() => setUploadOpen(false)} />
+            <AdminFooterNav />
         </div>
     );
 };

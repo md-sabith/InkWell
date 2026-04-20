@@ -1,35 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
 @layer base {
   body {
-    @apply bg-paper-100 text-ink font-sans selection:bg-paper-200 selection:text-ink;
+    @apply bg-paper-100 text-ink font-sans selection:bg-accent/20 selection:text-ink overflow-x-hidden antialiased;
+    line-height: 1.75;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
   }
 }
 
 .manuscript-card {
-  @apply bg-paper-50 border border-paper-200 shadow-manuscript rounded-sm p-2 md:p-4 relative overflow-hidden;
-}
-
-body {
-  @apply bg-paper-100 text-ink font-sans selection:bg-paper-200 selection:text-ink overflow-x-hidden;
+  @apply bg-paper-50 border border-paper-200 shadow-nordic rounded-lg p-6 md:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5;
 }
 
 .manuscript-card::before {
   content: '';
-  @apply absolute top-0 left-0 w-full h-1 bg-ink opacity-10;
+  @apply absolute top-0 left-0 w-full h-1 bg-accent opacity-0 transition-opacity duration-300;
+}
+
+.manuscript-card:hover::before {
+  @apply opacity-100;
 }
 
 .text-content {
-  @apply font-serif leading-relaxed text-lg;
+  @apply font-serif leading-[1.8] text-lg text-ink/90;
 }
 
 .btn-primary {
-  @apply px-6 py-2 bg-ink text-paper-50 rounded-sm hover:bg-ink-light transition-colors font-medium;
+  @apply px-8 py-3 bg-accent text-white rounded-lg hover:bg-accent-dark transition-all duration-300 font-medium tracking-wide shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm;
 }
 
 .btn-secondary {
-  @apply px-6 py-2 border border-ink text-ink rounded-sm hover:bg-ink hover:text-paper-50 transition-all font-medium;
+  @apply px-8 py-3 border border-paper-200 text-ink rounded-lg hover:border-accent hover:text-accent transition-all duration-300 font-medium tracking-wide;
 }
+
+.nav-link {
+  @apply text-ink/60 hover:text-accent transition-colors duration-200 font-medium text-sm tracking-wide;
+}
+
+
+.swal2-popup-class {
+ border-radius: 20px !important;
+ margin-top: -170px;
+ border-top: 6px solid #465F5E;
+ height: 400px;
+ backdrop-filter: blur(20px);
+}
+.swal2-button-class{
+  
+}
+
+

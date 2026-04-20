@@ -16,7 +16,7 @@ router.post('/', auth, async (req, res) => {
       status: 'pending' // explicitly set to pending
     });
     await work.save();
-    await work.populate('author', 'username profilePicture');
+    await work.populate('author', 'username profilePicture status');
     res.status(201).json(work);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -26,7 +26,7 @@ router.post('/', auth, async (req, res) => {
 // Get all approved works
 router.get('/', async (req, res) => {
   try {
-    const works = await Work.find({ status: 'approved' }).populate('author', 'username profilePicture').sort({ createdAt: -1 });
+    const works = await Work.find({ status: 'approved' }).populate('author', 'username profilePicture status').sort({ createdAt: -1 });
     res.json(works);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 // Get current user's works
 router.get('/my-works', auth, async (req, res) => {
   try {
-    const works = await Work.find({ author: req.user.id }).populate('author', 'username profilePicture').sort({ createdAt: -1 });
+    const works = await Work.find({ author: req.user.id }).populate('author', 'username profilePicture status').sort({ createdAt: -1 });
     res.json(works);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -61,7 +61,7 @@ router.post('/:id/rate', auth, async (req, res) => {
     }
     
     await work.save();
-    await work.populate('author', 'username profilePicture');
+    await work.populate('author', 'username profilePicture status');
     res.json(work);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -83,7 +83,7 @@ router.post('/:id/like', auth, async (req, res) => {
     }
     
     await work.save();
-    await work.populate('author', 'username profilePicture');
+    await work.populate('author', 'username profilePicture status');
     res.json(work);
   } catch (error) {
     res.status(400).json({ message: error.message });
