@@ -1,6 +1,7 @@
 services:
   # Backend Service
   - type: web
+    plan: free
     name: ink-well-backend
     runtime: node
     rootDir: backend
